@@ -23,17 +23,6 @@ var _raw_text: String = ""
 const RENDER_DEBOUNCE_SECONDS := 0.35
 var _render_debounce_timer: Timer = null
 
-#region Editor custom property variables
-var _action_property_name: String = "action_name"
-var _action_property_default: StringName = "--select--"
-var action_name: StringName = _action_property_default: set = set_action_property_value
-var device_indexes: PackedInt32Array = []
-## User override for disabling the helper for this node instance while
-## keeping the adapter enabled for the entire plugin.
-## NOTE: Done by overriding _get_property_list, _get, _set, etc
-var enable_input_helper: bool = true
-#endregion
-
 func _init() -> void:
 	is_input_helper_adapter_enabled = ProjectSettings.get_setting(InputIconConstants.INPUT_HELPER_ADAPTER_SETTING_NAME, false)
 
@@ -45,9 +34,8 @@ func _ready() -> void:
 		_render_debounce_timer.timeout.connect(_render_from_raw_text)
 		# Internal so it isn't saved into the user's scene or shown in the tree.
 		add_child(_render_debounce_timer, false, Node.INTERNAL_MODE_FRONT)
-	if is_input_helper_adapter_enabled and enable_input_helper:
-		input_helper_adapter = InputHelperAdapter.new(action_name, _render_from_raw_text, set_display_device)
-		input_helper_adapter.device_indexes = device_indexes
+	if is_input_helper_adapter_enabled:
+		input_helper_adapter = InputHelperAdapter.new("", _render_from_raw_text, set_display_device)
 		
 	# If text was set in editor/scene, treat it as initial raw text.
 	if _raw_text.is_empty() and not text.is_empty():
@@ -182,12 +170,6 @@ func _get_configuration_warnings() -> PackedStringArray:
 		return []
 	return ["Unknown action(s): %s\nRegistered actions: %s" % \
 		[", ".join(unknown), ", ".join(registered)]]
-
-func set_action_property_value(value: Variant) -> void:
-	action_name = value
-	if input_helper_adapter != null:
-		input_helper_adapter.action_name = value
-	_request_render()
 
 ## Sets the display_device and updates the controls texture
 func set_display_device(value: InputIconConstants.InputTypes) -> void:
