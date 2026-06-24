@@ -93,16 +93,16 @@ func _parse_to_bbcode(input: String) -> String:
 	while i < input.length():
 		var start := input.find(TOKEN_PREFIX, i)
 		if start == -1:
-			out += _escape_bbcode(input.substr(i))
+			out += input.substr(i)
 			break
 
 		if start > i:
-			out += _escape_bbcode(input.substr(i, start - i))
+			out += input.substr(i, start - i)
 
 		var action_start := start + p_len
 		var end := input.find(TOKEN_SUFFIX, action_start)
 		if end == -1:
-			out += _escape_bbcode(input.substr(start))
+			out += input.substr(start)
 			break
 
 		var action := input.substr(action_start, end - action_start).strip_edges()
@@ -120,12 +120,9 @@ func _action_to_bbcode(action: String) -> String:
 		return "[img=" + str(icon_size) + "]%s[/img]" % icon.resource_path
 
 	if show_action_name_when_missing_icon:
-		return "[%s]" % _escape_bbcode(action)
+		return action
 	return ""
 
-func _escape_bbcode(s: String) -> String:
-	return s.replace("[", "\\[").replace("]", "\\]")
-	
 func set_action_property_value(value: Variant) -> void:
 	action_name = value
 	if input_helper_adapter != null:
