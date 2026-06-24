@@ -12,8 +12,8 @@ extends RichTextLabel
 		action_index = value
 		_render_from_raw_text()
 
-@export var token_prefix: String = "[action:"
-@export var token_suffix: String = "]"
+const TOKEN_PREFIX := "[action:"
+const TOKEN_SUFFIX := "]"
 @export var show_action_name_when_missing_icon := true
 @export var icon_size: int = 32:
 	set(value):
@@ -87,11 +87,11 @@ func _parse_to_bbcode(input: String) -> String:
 
 	var out := ""
 	var i := 0
-	var p_len := token_prefix.length()
-	var s_len := token_suffix.length()
+	var p_len := TOKEN_PREFIX.length()
+	var s_len := TOKEN_SUFFIX.length()
 
 	while i < input.length():
-		var start := input.find(token_prefix, i)
+		var start := input.find(TOKEN_PREFIX, i)
 		if start == -1:
 			out += _escape_bbcode(input.substr(i))
 			break
@@ -100,7 +100,7 @@ func _parse_to_bbcode(input: String) -> String:
 			out += _escape_bbcode(input.substr(i, start - i))
 
 		var action_start := start + p_len
-		var end := input.find(token_suffix, action_start)
+		var end := input.find(TOKEN_SUFFIX, action_start)
 		if end == -1:
 			out += _escape_bbcode(input.substr(start))
 			break
