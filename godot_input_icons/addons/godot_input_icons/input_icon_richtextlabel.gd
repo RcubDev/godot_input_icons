@@ -5,7 +5,7 @@ extends RichTextLabel
 @export var display_device: InputIconConstants.InputTypes = InputIconConstants.InputTypes.Keyboard:
 	set(value):
 		display_device = value
-		_render_from_raw_text()
+		_request_render()
 
 const TOKEN_PREFIX := "[action:"
 const TOKEN_SUFFIX := "]"
@@ -13,12 +13,15 @@ const TOKEN_SUFFIX := "]"
 @export var icon_size: int = 32:
 	set(value):
 		icon_size = value
-		_render_from_raw_text()
+		_request_render()
 
 var _icon_resolver: InputIconResolver = InputIconResolver.new()
 var input_helper_adapter: InputHelperAdapter = null
 var is_input_helper_adapter_enabled: bool = false
 var _raw_text: String = ""
+
+const RENDER_DEBOUNCE_SECONDS := 0.5
+var _render_debounce_timer: Timer = null
 
 #region Editor custom property variables
 var _action_property_name: String = "action_name"
@@ -36,6 +39,12 @@ func _init() -> void:
 
 func _ready() -> void:
 	bbcode_enabled = true
+	if Engine.is_editor_hint():
+		_render_debounce_timer = Timer.new()
+		_render_debounce_timer.one_shot = true
+		_render_debounce_timer.timeout.connect(_render_from_raw_text)
+		# Internal so it isn't saved into the user's scene or shown in the tree.
+		add_child(_render_debounce_timer, false, Node.INTERNAL_MODE_FRONT)
 	if is_input_helper_adapter_enabled and enable_input_helper:
 		input_helper_adapter = InputHelperAdapter.new(action_name, _render_from_raw_text, set_display_device)
 		input_helper_adapter.device_indexes = device_indexes
@@ -60,7 +69,7 @@ func get_rich_input_text() -> String:
 func _set(property: StringName, value: Variant) -> bool:
 	if property == "text":
 		_raw_text = str(value)
-		_render_from_raw_text()
+		_request_render()
 		return true
 	return false
 
@@ -68,6 +77,15 @@ func _get(property: StringName) -> Variant:
 	if property == "text":
 		return _raw_text
 	return null
+
+## Debounced entry point for re-rendering; restarts a single timer so a burst of
+## edits only renders once, after the text settles.
+func _request_render() -> void:
+	# No timer outside the editor: render immediately. In the editor, debounce.
+	if _render_debounce_timer == null:
+		_render_from_raw_text()
+		return
+	_render_debounce_timer.start(RENDER_DEBOUNCE_SECONDS)
 
 func _render_from_raw_text() -> void:
 	if not is_inside_tree():
@@ -132,9 +150,8 @@ func set_action_property_value(value: Variant) -> void:
 	action_name = value
 	if input_helper_adapter != null:
 		input_helper_adapter.action_name = value
-	_render_from_raw_text()
+	_request_render()
 
 ## Sets the display_device and updates the controls texture
 func set_display_device(value: InputIconConstants.InputTypes) -> void:
 	display_device = value
-	_render_from_raw_text()
