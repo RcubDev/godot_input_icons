@@ -79,13 +79,14 @@ func _render_from_raw_text() -> void:
 		return
 
 	clear()
-	append_text(_parse_to_bbcode(_raw_text))
+	_append_parsed(_raw_text)
 
-func _parse_to_bbcode(input: String) -> String:
+## Walks the raw text, appending plain segments as BBCode and replacing each
+## [action:<name>] token with its resolved icon.
+func _append_parsed(input: String) -> void:
 	if input.is_empty():
-		return ""
+		return
 
-	var out := ""
 	var i := 0
 	var p_len := TOKEN_PREFIX.length()
 	var s_len := TOKEN_SUFFIX.length()
@@ -93,35 +94,34 @@ func _parse_to_bbcode(input: String) -> String:
 	while i < input.length():
 		var start := input.find(TOKEN_PREFIX, i)
 		if start == -1:
-			out += input.substr(i)
+			append_text(input.substr(i))
 			break
 
 		if start > i:
-			out += input.substr(i, start - i)
+			append_text(input.substr(i, start - i))
 
 		var action_start := start + p_len
 		var end := input.find(TOKEN_SUFFIX, action_start)
 		if end == -1:
-			out += input.substr(start)
+			append_text(input.substr(start))
 			break
 
 		var action := input.substr(action_start, end - action_start).strip_edges()
-		out += _action_to_bbcode(action)
+		_append_action(action)
 		i = end + s_len
 
-	return out
-
-func _action_to_bbcode(action: String) -> String:
+func _append_action(action: String) -> void:
 	if action.is_empty():
-		return ""
+		return
 
 	var icon: Texture2D = _icon_resolver.get_icon(display_device, StringName(action), action_index)
-	if icon and icon.resource_path != "":
-		return "[img=" + str(icon_size) + "]%s[/img]" % icon.resource_path
+	if icon:
+		# Constrain height so every icon shares the text line-height; width scales.
+		add_image(icon, 0, icon_size)
+		return
 
 	if show_action_name_when_missing_icon:
-		return action
-	return ""
+		append_text(action)
 
 func set_action_property_value(value: Variant) -> void:
 	action_name = value
