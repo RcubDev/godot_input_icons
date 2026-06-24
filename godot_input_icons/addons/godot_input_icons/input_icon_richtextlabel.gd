@@ -7,11 +7,6 @@ extends RichTextLabel
 		display_device = value
 		_render_from_raw_text()
 
-@export var action_index: int = 0:
-	set(value):
-		action_index = value
-		_render_from_raw_text()
-
 const TOKEN_PREFIX := "[action:"
 const TOKEN_SUFFIX := "]"
 @export var show_action_name_when_missing_icon := true
@@ -110,11 +105,21 @@ func _append_parsed(input: String) -> void:
 		_append_action(action)
 		i = end + s_len
 
-func _append_action(action: String) -> void:
+func _append_action(token: String) -> void:
+	if token.is_empty():
+		return
+
+	var action := token
+	var index := 0
+	var sep := token.rfind(":")
+	if sep != -1 and token.substr(sep + 1).is_valid_int():
+		action = token.substr(0, sep).strip_edges()
+		index = token.substr(sep + 1).to_int()
+
 	if action.is_empty():
 		return
 
-	var icon: Texture2D = _icon_resolver.get_icon(display_device, StringName(action), action_index)
+	var icon: Texture2D = _icon_resolver.get_icon(display_device, StringName(action), index)
 	if icon:
 		# Constrain height so every icon shares the text line-height; width scales.
 		add_image(icon, 0, icon_size)
