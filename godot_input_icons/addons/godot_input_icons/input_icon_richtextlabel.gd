@@ -20,7 +20,7 @@ var input_helper_adapter: InputHelperAdapter = null
 var is_input_helper_adapter_enabled: bool = false
 var _raw_text: String = ""
 
-const RENDER_DEBOUNCE_SECONDS := 0.5
+const RENDER_DEBOUNCE_SECONDS := 0.35
 var _render_debounce_timer: Timer = null
 
 #region Editor custom property variables
@@ -93,6 +93,8 @@ func _render_from_raw_text() -> void:
 
 	clear()
 	_append_parsed(_raw_text)
+	if Engine.is_editor_hint():
+		update_configuration_warnings()
 
 ## Walks the raw text, appending plain segments as BBCode and replacing each
 ## [action:<name>] token with its resolved icon.
@@ -127,17 +129,14 @@ func _append_action(token: String) -> void:
 	if token.is_empty():
 		return
 
-	var action := token
-	var index := 0
-	var sep := token.rfind(":")
-	if sep != -1 and token.substr(sep + 1).is_valid_int():
-		action = token.substr(0, sep).strip_edges()
-		index = token.substr(sep + 1).to_int()
-
+	var parsed := _parse_token(token)
+	var action: String = parsed[0]
+	var index: int = parsed[1]
 	if action.is_empty():
 		return
 
-	var icon: Texture2D = _icon_resolver.get_icon(display_device, StringName(action), index)
+	# Stay quiet in the editor (config warnings cover it); keep console diagnostics at runtime.
+	var icon: Texture2D = _icon_resolver.get_icon(display_device, StringName(action), index, not Engine.is_editor_hint())
 	if icon:
 		# Constrain height so every icon shares the text line-height; width scales.
 		add_image(icon, 0, icon_size)
@@ -145,6 +144,44 @@ func _append_action(token: String) -> void:
 
 	if show_action_name_when_missing_icon:
 		append_text(action)
+
+## Splits a token body like "Jump" or "Jump:1" into [action_name, binding_index].
+func _parse_token(token: String) -> Array:
+	var sep := token.rfind(":")
+	if sep != -1 and token.substr(sep + 1).is_valid_int():
+		return [token.substr(0, sep).strip_edges(), token.substr(sep + 1).to_int()]
+	return [token, 0]
+
+## Returns the unique action names referenced by [action:<name>] tokens in `input`.
+func _referenced_actions(input: String) -> PackedStringArray:
+	var actions: PackedStringArray = []
+	var i := 0
+	var p_len := TOKEN_PREFIX.length()
+	var s_len := TOKEN_SUFFIX.length()
+	while i < input.length():
+		var start := input.find(TOKEN_PREFIX, i)
+		if start == -1:
+			break
+		var action_start := start + p_len
+		var end := input.find(TOKEN_SUFFIX, action_start)
+		if end == -1:
+			break
+		var action: String = _parse_token(input.substr(action_start, end - action_start).strip_edges())[0]
+		if action != "" and action not in actions:
+			actions.append(action)
+		i = end + s_len
+	return actions
+
+func _get_configuration_warnings() -> PackedStringArray:
+	var registered := InputIconResolver.get_all_user_registered_inputs()
+	var unknown: PackedStringArray = []
+	for action in _referenced_actions(_raw_text):
+		if action not in registered:
+			unknown.append(action)
+	if unknown.is_empty():
+		return []
+	return ["Unknown action(s): %s\nRegistered actions: %s" % \
+		[", ".join(unknown), ", ".join(registered)]]
 
 func set_action_property_value(value: Variant) -> void:
 	action_name = value

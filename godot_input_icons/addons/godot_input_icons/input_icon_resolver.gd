@@ -13,14 +13,14 @@ func _init() -> void:
 
 ## Gets an icon from the plugin's registed icon map based off of the device_type
 ## and the input_action passed in
-func get_icon(device_type: InputTypes, input_action: String, index: int = 0) -> Texture2D:
+func get_icon(device_type: InputTypes, input_action: String, index: int = 0, push_warnings: bool = true) -> Texture2D:
 	var result: Texture2D = null
 	if device_type == InputTypes.Keyboard:
-		result = get_keyboard_icon(input_action, index)
+		result = get_keyboard_icon(input_action, index, push_warnings)
 		if not result and input_icon_map.unmapped_key:
 			result = input_icon_map.unmapped_key
 	else:
-		result = get_joypad_icon(device_type, input_action, index)
+		result = get_joypad_icon(device_type, input_action, index, push_warnings)
 		if not result and input_icon_map.unmapped_controller_button:
 			result = input_icon_map.unmapped_controller_button
 	return result
@@ -28,8 +28,8 @@ func get_icon(device_type: InputTypes, input_action: String, index: int = 0) -> 
 
 ## Gets the keyboard icon for the first keyboard input associated with
 ## an action
-func get_keyboard_icon(input_action: String, index: int = 0) -> Texture2D:
-	var input_event: InputEvent = get_keyboard_input_event_for_action(input_action, index)
+func get_keyboard_icon(input_action: String, index: int = 0, push_warnings: bool = true) -> Texture2D:
+	var input_event: InputEvent = get_keyboard_input_event_for_action(input_action, index, push_warnings)
 	var textures: Array[Texture2D] = []
 	# Add modifiers first
 	if input_event is InputEventWithModifiers:
@@ -88,14 +88,15 @@ func get_mouse_button_icon(input_event: InputEventMouseButton) -> Texture2D:
 
 ## Gets the controller icon for the first controller input associated with
 ## an action
-func get_joypad_icon(device_type: InputTypes, input_action: String, index: int = 0) -> Texture2D:
+func get_joypad_icon(device_type: InputTypes, input_action: String, index: int = 0, push_warnings: bool = true) -> Texture2D:
 	if not input_icon_map.controller_icons.has(device_type):
-		push_warning("InputIcons: Missing icon map for device %s" % \
-			[get_device_type_display(device_type)])
+		if push_warnings:
+			push_warning("InputIcons: Missing icon map for device %s" % \
+				[get_device_type_display(device_type)])
 		return null
-		
+
 	var joypad_icon_map: ControllerIcons = input_icon_map.controller_icons.get(device_type)
-	var input_event: InputEvent = get_joypad_input_event_for_action(input_action, index)
+	var input_event: InputEvent = get_joypad_input_event_for_action(input_action, index, push_warnings)
 	if input_event is InputEventJoypadButton:
 		return _get_joypad_button_icon(joypad_icon_map, input_event)
 	elif input_event is InputEventJoypadMotion:
@@ -129,12 +130,13 @@ func get_input_events_for_action(input_action: String) -> Array[InputEvent]:
 ## - returns null if no actions are found
 ## NOTE: The index applies to only input events for keyboard and will be
 ## in the same order that they are registered in the ProjectSettings input	
-func get_keyboard_input_event_for_action(input_action: String, index: int = 0) -> InputEvent:
+func get_keyboard_input_event_for_action(input_action: String, index: int = 0, push_warnings: bool = true) -> InputEvent:
 	var events: Array[InputEvent] = get_input_events_for_action(input_action)
 	var filtered_events: Array[InputEvent] = events.filter(func(event): return event is InputEventKey or event is InputEventMouseButton)
 	if not filtered_events or index >= filtered_events.size():
-		push_warning("InputIcons: keyboard action '%s' at index %s not found." % \
-			 [input_action, index])
+		if push_warnings:
+			push_warning("InputIcons: keyboard action '%s' at index %s not found." % \
+				 [input_action, index])
 		return null
 	return filtered_events[index]
 	
@@ -144,13 +146,14 @@ func get_keyboard_input_event_for_action(input_action: String, index: int = 0) -
 ## - returns null if no actions are found
 ## NOTE: The index applies to only input events for joypad and will be
 ## in the same order that they are registered in the ProjectSettings input 
-func get_joypad_input_event_for_action(input_action: String, index: int = 0) -> InputEvent:
+func get_joypad_input_event_for_action(input_action: String, index: int = 0, push_warnings: bool = true) -> InputEvent:
 	var events: Array[InputEvent] = get_input_events_for_action(input_action)
 	var filtered_events = events.filter(func(event): return event is InputEventJoypadButton \
 		 or event is InputEventJoypadMotion)
 	if not filtered_events or index >= filtered_events.size():
-		push_warning("InputIcons: joypad action '%s' at index %s not found." % \
-			 [input_action, index])
+		if push_warnings:
+			push_warning("InputIcons: joypad action '%s' at index %s not found." % \
+				 [input_action, index])
 		return null
 	return filtered_events[index]
 	
