@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cipb74td5x87b"]
+[gd_scene load_steps=5 format=3 uid="uid://cipb74td5x87b"]
 
 [ext_resource type="Script" uid="uid://dofhds2ttw30" path="res://remap_input_demo/remap_example.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://b0ll35eulteec" path="res://remap_input_demo/remap_input_row.tscn" id="1_1bvp3"]
+[ext_resource type="Script" uid="uid://bpt8as8jhyvp1" path="res://addons/godot_input_icons/input_icon_richtextlabel.gd" id="3_1bvp3"]
 [ext_resource type="Script" uid="uid://nei7ddo8bmn0" path="res://remap_input_demo/input_helper_warning_panel.gd" id="3_h2yge"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
@@ -99,3 +100,75 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Enable input helper support Project Settings > Input Icons > Settings > Use Input Helper"
 autowrap_mode = 2
+
+[node name="RichTextExample" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -169.0
+offset_top = -119.0
+offset_right = 169.0
+offset_bottom = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="RichTextExample"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RichTextExample/MarginContainer"]
+layout_mode = 2
+
+[node name="AttackRichText" type="RichTextLabel" parent="RichTextExample/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+bbcode_enabled = true
+text = "Use [action:attack] or [action:attack:1] to attack!"
+vertical_alignment = 1
+script = ExtResource("3_1bvp3")
+metadata/_custom_type_script = "uid://bpt8as8jhyvp1"
+
+[node name="DefendRichText" type="RichTextLabel" parent="RichTextExample/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+bbcode_enabled = true
+text = "Use [action:defend] to defend"
+vertical_alignment = 1
+script = ExtResource("3_1bvp3")
+metadata/_custom_type_script = "uid://bpt8as8jhyvp1"
+
+[node name="ExampleHBox" type="VBoxContainer" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 133.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="RemapButton" type="Button" parent="ExampleHBox"]
+layout_mode = 2
+text = "Remap Example"
+
+[node name="RichTextButton" type="Button" parent="ExampleHBox"]
+layout_mode = 2
+text = "Rich Text Example"
+
+[connection signal="ready" from="RemapExample" to="RemapExample" method="show"]
+[connection signal="ready" from="RichTextExample" to="RichTextExample" method="hide"]
+[connection signal="pressed" from="ExampleHBox/RemapButton" to="RemapExample" method="show"]
+[connection signal="pressed" from="ExampleHBox/RemapButton" to="RichTextExample" method="hide"]
+[connection signal="pressed" from="ExampleHBox/RichTextButton" to="RemapExample" method="hide"]
+[connection signal="pressed" from="ExampleHBox/RichTextButton" to="RichTextExample" method="show"]

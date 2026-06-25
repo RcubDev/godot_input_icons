@@ -23,6 +23,9 @@ This is a godot plugin that helps to display user registered actions and control
 - **InputIconTextureRect**: A new control node that displays icons registered with the input icons plugin.
   - Helps developers visualize their input icon textures for different input types in the editor as well as responds to changes in values at runtime
   - Select from list of registered user inputs
+- **InputIconRichTextLabel**: A new control node that renders input icons inline with text using `[action:NAME]` tokens.
+  - Mix action icons with regular BBCode text, with multiple actions per label
+  - Each token resolves to the icon for the current display device
 - **InputIconResolver**: A godot object that can be instantiated to resolve input icons at runtime
   - Supports modifier keys (shift, ctrl, etc)
 - **Remap Input Demo**: A demo of how to use this plugin to remap inputs and display their icons in game
@@ -44,7 +47,9 @@ This is a godot plugin that helps to display user registered actions and control
 
 ## 📝 How to use
 
-The plugin is usable out of the box without doing anything but using the new control node.
+The plugin is usable out of the box without doing anything but using the new control nodes.
+
+### Using the InputIconTextureRect
 
 1. Add the `InputIconTextureRect` to your scene
 2. Click on it and open the inspector there will be 3 properties
@@ -52,6 +57,28 @@ The plugin is usable out of the box without doing anything but using the new con
    - Display Device: The device to use when choosing what input type to display in the texture
    - Action Index: The index of the registered user input action to use when choosing which icon to display in the texture
    - Action Name: A user registered action name (select from registered actions!)
+
+### Using the InputIconRichTextLabel
+
+The `InputIconRichTextLabel` renders input icons *inline* with text. Add the node to your scene and set its text using `[action:NAME]` tokens. Each token is replaced with the icon for that action on the current display device.
+
+```txt
+Use [action:attack] to attack and [action:jump] to jump!
+```
+
+It has the following properties:
+
+- **Display Device**: The device to use when choosing which input type to display.
+- **Icon Size**: The height (in pixels) icons are scaled to; width scales to keep the aspect ratio.
+- **Show Action Name When Missing Icon**: When an action has no icon, fall back to showing its name as text.
+
+Notes:
+
+- Regular [BBCode](https://docs.godotengine.org/en/stable/tutorials/ui/bbcode_in_richtextlabel.html) works alongside tokens, e.g. `[b]Press[/b] [action:jump]`.
+- If an action has multiple bindings for a device, choose one with a trailing index: `[action:jump:1]` shows the second binding (defaults to `0`).
+- Unknown action tokens are flagged with a configuration warning in the editor.
+- Set the text in the inspector or from script — assigning `text` works, and C# callers can use `set_rich_input_text()`.
+- With [Input Helper Integration](#using-input-helper-integration) enabled, the label automatically re-renders when the active device changes (keyboard ↔ controller).
 
 ### Registering your own icons
 
