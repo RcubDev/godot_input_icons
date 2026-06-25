@@ -36,7 +36,7 @@ func _ready() -> void:
 		add_child(_render_debounce_timer, false, Node.INTERNAL_MODE_FRONT)
 	if is_input_helper_adapter_enabled:
 		input_helper_adapter = InputHelperAdapter.new("", _render_from_raw_text, set_display_device)
-		
+
 	# If text was set in editor/scene, treat it as initial raw text.
 	if _raw_text.is_empty() and not text.is_empty():
 		_raw_text = text
