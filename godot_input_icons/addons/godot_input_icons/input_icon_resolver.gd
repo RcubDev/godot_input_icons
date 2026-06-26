@@ -4,6 +4,8 @@ class_name InputIconResolver
 const InputTypes = preload("res://addons/godot_input_icons/input_icon_constants.gd").InputTypes
 var input_icon_map: InputIconMap = null
 
+static var _combine_cache: Dictionary = {}
+
 
 ## Initalizes the resolver by loading the map specified by the plugin
 func _init() -> void:
@@ -244,6 +246,10 @@ static func get_device_type_display(device_type: InputTypes) -> String:
 
 
 static func combine_textures_with_overlap(textures: Array[Texture2D]) -> Texture2D:
+	var cache_key := _combine_cache_key("overlap", textures, 0)
+	if _combine_cache.has(cache_key):
+		return _combine_cache[cache_key]
+
 	var max_width: int = 0
 	var max_height: int = 0
 
@@ -252,7 +258,7 @@ static func combine_textures_with_overlap(textures: Array[Texture2D]) -> Texture
 			continue
 		max_width = max(max_width, texture.get_width())
 		max_height = max(max_height, texture.get_height())
-	
+
 	var combined_image = Image.create_empty(max_width, max_height, false, Image.FORMAT_RGBA8)
 
 	# Blend each texture onto the combined image
@@ -261,12 +267,18 @@ static func combine_textures_with_overlap(textures: Array[Texture2D]) -> Texture
 			continue
 		var image: Image = texture.get_image()
 		combined_image.blend_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2(0, 0))
-			
-	return ImageTexture.create_from_image(combined_image)
+
+	var combined := ImageTexture.create_from_image(combined_image)
+	_combine_cache[cache_key] = combined
+	return combined
 
 
 ## Combines an array of Texture2Ds and converts them into a single Texture2D with a gap
 static func combine_textures_with_gap(textures: Array[Texture2D], gap: int = 2) -> Texture2D:
+	var cache_key := _combine_cache_key("gap", textures, gap)
+	if _combine_cache.has(cache_key):
+		return _combine_cache[cache_key]
+
 	var total_width: int = 0
 	var max_height: int = 0
 
@@ -275,7 +287,7 @@ static func combine_textures_with_gap(textures: Array[Texture2D], gap: int = 2) 
 		max_height = max(max_height, texture.get_height())
 
 	total_width -= gap  # Remove the last gap
-	
+
 	var combined_image: Image = Image.create_empty(total_width, max_height, false, Image.FORMAT_RGBA8)
 
 	# Blit each texture onto the combined image with a gap
@@ -284,8 +296,17 @@ static func combine_textures_with_gap(textures: Array[Texture2D], gap: int = 2) 
 		var image = texture.get_image()
 		combined_image.blit_rect(image, Rect2(Vector2.ZERO, image.get_size()), Vector2(current_x, 0))
 		current_x += texture.get_width() + gap
-			
-	return ImageTexture.create_from_image(combined_image)
+
+	var combined := ImageTexture.create_from_image(combined_image)
+	_combine_cache[cache_key] = combined
+	return combined
+
+
+static func _combine_cache_key(kind: String, textures: Array[Texture2D], gap: int) -> String:
+	var parts: PackedStringArray = [kind, str(gap)]
+	for texture in textures:
+		parts.append(str(texture.get_instance_id()) if texture else "null")
+	return "|".join(parts)
 
 
 ## Gets all registered user inputs (filters out inputs that start with ui_)

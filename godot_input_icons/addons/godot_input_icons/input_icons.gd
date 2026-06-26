@@ -1,6 +1,9 @@
 @tool
 extends EditorPlugin
 
+const InputMapIconInjector = preload("res://addons/godot_input_icons/modules/input_map_icon_injector.gd")
+var _icon_injector: Node = null
+
 const SETTINGS_CONFIGURATION: Dictionary = {
 	InputIconConstants.MAP_PATH_SETTING_NAME: {
 		value = InputIconConstants.DEFAULT_MAP_PATH,
@@ -14,14 +17,29 @@ const SETTINGS_CONFIGURATION: Dictionary = {
 		type = TYPE_BOOL,
 		is_basic = true,
 		require_restart = true
+	},
+	InputIconConstants.INJECT_INPUT_MAP_ICONS_SETTING_NAME: {
+		value = true,
+		type = TYPE_BOOL,
+		is_basic = true,
+		require_restart = true
+	},
+	InputIconConstants.INJECT_INPUT_MAP_ICONS_POLL_DELAY_SETTING_NAME: {
+		value = 0.0,
+		type = TYPE_FLOAT,
+		is_basic = true,
+		require_restart = true
 	}
 }
 
 
 func _enter_tree() -> void:
 	initialize()
-	
-	
+	if ProjectSettings.get_setting(InputIconConstants.INJECT_INPUT_MAP_ICONS_SETTING_NAME, true):
+		_icon_injector = InputMapIconInjector.new()
+		add_child(_icon_injector)
+
+
 static func initialize() -> void:
 	for key: String in SETTINGS_CONFIGURATION:
 		var setting_config: Dictionary = SETTINGS_CONFIGURATION[key]
@@ -43,5 +61,6 @@ static func initialize() -> void:
 
 
 func _exit_tree() -> void:
-	# Clean-up of the plugin goes here.
-	pass
+	if is_instance_valid(_icon_injector):
+		_icon_injector.queue_free()
+		_icon_injector = null
