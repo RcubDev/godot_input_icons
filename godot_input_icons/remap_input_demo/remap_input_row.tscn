@@ -1,26 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0ll35eulteec"]
+[gd_scene format=3 uid="uid://b0ll35eulteec"]
 
 [ext_resource type="Script" uid="uid://drbf82d3guos0" path="res://remap_input_demo/remap_input_row.gd" id="1_0q6nn"]
 [ext_resource type="Script" uid="uid://d2a2relwnivg5" path="res://addons/godot_input_icons/input_icon_texture_rect.gd" id="2_8k1rm"]
 [ext_resource type="Texture2D" uid="uid://di0tthoimapkw" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/special_keys/key_space.tres" id="2_spncc"]
 
-[node name="RemapInputRow" type="HBoxContainer"]
+[node name="RemapInputRow" type="HBoxContainer" unique_id=457289625]
 custom_minimum_size = Vector2(0, 48)
 script = ExtResource("1_0q6nn")
 
-[node name="RowLabel" type="Label" parent="."]
+[node name="RowLabel" type="Label" parent="." unique_id=1949197124]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Action Name"
 horizontal_alignment = 1
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=256885769]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RemapButton" type="Button" parent="Control"]
+[node name="RemapButton" type="Button" parent="Control" unique_id=1402995963]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(52, 48)
 layout_mode = 1
@@ -31,7 +31,7 @@ offset_right = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InputIconTextureRect" type="TextureRect" parent="Control/RemapButton"]
+[node name="InputIconTextureRect" type="TextureRect" parent="Control/RemapButton" unique_id=1411989665]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 14

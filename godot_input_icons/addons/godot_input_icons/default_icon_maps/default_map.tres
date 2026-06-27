@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="InputIconMap" load_steps=10 format=3 uid="uid://dugr8x7rasv3i"]
+[gd_resource type="Resource" script_class="InputIconMap" format=3 uid="uid://dugr8x7rasv3i"]
 
 [ext_resource type="Script" uid="uid://db0gxldvhci3p" path="res://addons/godot_input_icons/resources/controller_icons.gd" id="1_el15c"]
 [ext_resource type="Resource" uid="uid://nqd1cqbwctrs" path="res://addons/godot_input_icons/default_icon_maps/controller/xbox_default_map.tres" id="2_w2iqv"]

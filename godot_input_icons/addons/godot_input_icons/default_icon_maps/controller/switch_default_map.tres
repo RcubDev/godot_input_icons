@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ControllerIcons" load_steps=20 format=3 uid="uid://dmpbvlphvxjm1"]
+[gd_resource type="Resource" script_class="ControllerIcons" format=3 uid="uid://dmpbvlphvxjm1"]
 
 [ext_resource type="Texture2D" uid="uid://b71d3a27bua6w" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/switch/back_button.tres" id="1_qw2ph"]
 [ext_resource type="Texture2D" uid="uid://dlu531dkjooda" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/generic/dpad_down.tres" id="2_hc7s4"]

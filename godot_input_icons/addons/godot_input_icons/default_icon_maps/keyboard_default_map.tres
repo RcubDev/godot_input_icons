@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="KeyboardIcons" load_steps=86 format=3 uid="uid://dcrdbbhivenx7"]
+[gd_resource type="Resource" script_class="KeyboardIcons" format=3 uid="uid://dcrdbbhivenx7"]
 
 [ext_resource type="Texture2D" uid="uid://dq65jge6qub2p" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/numerics/key_0.tres" id="1_wmimk"]
 [ext_resource type="Texture2D" uid="uid://ctdc5ane87gcq" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/numerics/key_1.tres" id="2_kwctg"]

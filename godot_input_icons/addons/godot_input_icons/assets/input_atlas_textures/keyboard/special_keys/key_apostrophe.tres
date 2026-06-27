@@ -1,4 +1,4 @@
-[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://vuh6tkhybons"]
+[gd_resource type="AtlasTexture" format=3 uid="uid://vuh6tkhybons"]
 
 [ext_resource type="Texture2D" uid="uid://o1ng1yyo48bk" path="res://addons/godot_input_icons/assets/kenney_input-prompts-pixel-16/Tilemap/tilemap_packed.png" id="1_lj34b"]
 
