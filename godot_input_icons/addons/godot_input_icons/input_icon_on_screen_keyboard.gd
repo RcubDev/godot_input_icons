@@ -245,6 +245,10 @@ func backspace() -> void:
 func insert_space() -> void:
 	_on_action("space")
 
+## Submits the current text (e.g. bound to a controller button).
+func submit() -> void:
+	_on_action("enter")
+
 ## Moves focus to the first key (e.g. when the keyboard is shown).
 func focus_first() -> void:
 	if _first_button:

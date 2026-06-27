@@ -68,13 +68,20 @@ func _input(event: InputEvent) -> void:
 		_controller_active = false
 	if _controller_active != was_controller:
 		_on_device_changed()
-	# Face-button shortcuts while the keyboard is open: left deletes, top spaces.
+	# Controller shortcuts while the keyboard is open: left deletes, top spaces,
+	# Start submits, B cancels.
 	if _target != null and event is InputEventJoypadButton and event.pressed:
 		if event.button_index == JOY_BUTTON_X:
 			_keyboard.backspace()
 			get_viewport().set_input_as_handled()
 		elif event.button_index == JOY_BUTTON_Y:
 			_keyboard.insert_space()
+			get_viewport().set_input_as_handled()
+		elif event.button_index == JOY_BUTTON_START:
+			_keyboard.submit()
+			get_viewport().set_input_as_handled()
+		elif event.button_index == JOY_BUTTON_B:
+			_close(true)
 			get_viewport().set_input_as_handled()
 
 func _on_device_changed() -> void:
