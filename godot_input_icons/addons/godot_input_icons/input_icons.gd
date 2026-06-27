@@ -32,8 +32,17 @@ const SETTINGS_CONFIGURATION: Dictionary = {
 		type = TYPE_FLOAT,
 		is_basic = true,
 		require_restart = true
+	},
+	InputIconConstants.AUTO_KEYBOARD_SETTING_NAME: {
+		value = true,
+		type = TYPE_BOOL,
+		is_basic = true,
+		require_restart = true
 	}
 }
+
+const KEYBOARD_AUTOLOAD_NAME := "InputIconKeyboard"
+const KEYBOARD_AUTOLOAD_PATH := "res://addons/godot_input_icons/modules/input_icon_keyboard.gd"
 
 
 func _enter_tree() -> void:
@@ -44,6 +53,8 @@ func _enter_tree() -> void:
 	_theme_builder = IconThemeBuilder.new()
 	_theme_builder_button = add_control_to_bottom_panel(_theme_builder, "Input Icons")
 	_theme_builder_button.visible = false
+	if not ProjectSettings.has_setting("autoload/" + KEYBOARD_AUTOLOAD_NAME):
+		add_autoload_singleton(KEYBOARD_AUTOLOAD_NAME, KEYBOARD_AUTOLOAD_PATH)
 
 
 func _handles(object: Object) -> bool:
@@ -82,6 +93,8 @@ static func initialize() -> void:
 
 
 func _exit_tree() -> void:
+	if ProjectSettings.has_setting("autoload/" + KEYBOARD_AUTOLOAD_NAME):
+		remove_autoload_singleton(KEYBOARD_AUTOLOAD_NAME)
 	if is_instance_valid(_icon_injector):
 		_icon_injector.queue_free()
 		_icon_injector = null

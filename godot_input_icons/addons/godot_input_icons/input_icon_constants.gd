@@ -6,6 +6,7 @@ const INPUT_HELPER_ADAPTER_SETTING_NAME: String = "input_icons/settings/use_inpu
 const MAP_PATH_SETTING_NAME: String = "input_icons/settings/input_icons_map"
 const INJECT_INPUT_MAP_ICONS_SETTING_NAME: String = "input_icons/settings/inject_input_map_icons"
 const INJECT_INPUT_MAP_ICONS_POLL_DELAY_SETTING_NAME: String = "input_icons/settings/inject_input_map_icons_poll_delay"
+const AUTO_KEYBOARD_SETTING_NAME: String = "input_icons/settings/auto_on_screen_keyboard"
 
 enum InputTypes {
 	Keyboard,
