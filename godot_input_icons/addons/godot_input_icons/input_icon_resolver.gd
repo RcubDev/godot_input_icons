@@ -28,6 +28,37 @@ func get_icon(device_type: InputTypes, input_action: String, index: int = 0, pus
 	return result
 
 
+## Gets the icon for a raw key name (e.g. "a", "space"), independent of any bound
+## action. Used by the on-screen keyboard. When uppercase is requested, returns
+## the uppercase glyph if authored, otherwise falls back to the base set.
+func get_raw_key_icon(key_name: String, uppercase: bool = false) -> Texture2D:
+	if input_icon_map == null or input_icon_map.keyboard_icons == null:
+		return null
+	if uppercase:
+		var upper: Texture2D = input_icon_map.keyboard_icons.get("key_%s_upper" % key_name)
+		if upper:
+			return upper
+	return input_icon_map.keyboard_icons.get("key_%s" % key_name)
+
+
+## Uppercase letter glyph with no fallback to the base set (null if unauthored).
+func get_uppercase_key_icon(key_name: String) -> Texture2D:
+	if input_icon_map == null or input_icon_map.keyboard_icons == null:
+		return null
+	return input_icon_map.keyboard_icons.get("key_%s_upper" % key_name)
+
+
+## True when at least one uppercase letter glyph is authored, which is what gates
+## the on-screen keyboard's Shift key.
+func has_keyboard_uppercase() -> bool:
+	if input_icon_map == null or input_icon_map.keyboard_icons == null:
+		return false
+	for code in range("a".unicode_at(0), "z".unicode_at(0) + 1):
+		if input_icon_map.keyboard_icons.get("key_%s_upper" % char(code)) != null:
+			return true
+	return false
+
+
 ## Gets the keyboard icon for the first keyboard input associated with
 ## an action
 func get_keyboard_icon(input_action: String, index: int = 0, push_warnings: bool = true) -> Texture2D:
