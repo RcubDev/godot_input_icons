@@ -107,3 +107,33 @@ extends Resource
 @export var key_f10: Texture2D
 @export var key_f11: Texture2D
 @export var key_f12: Texture2D
+
+# Optional uppercase letter glyphs. When any are assigned the on-screen keyboard
+# shows a Shift key that swaps the letters to these.
+@export_group("Uppercase Letters")
+@export var key_a_upper: Texture2D
+@export var key_b_upper: Texture2D
+@export var key_c_upper: Texture2D
+@export var key_d_upper: Texture2D
+@export var key_e_upper: Texture2D
+@export var key_f_upper: Texture2D
+@export var key_g_upper: Texture2D
+@export var key_h_upper: Texture2D
+@export var key_i_upper: Texture2D
+@export var key_j_upper: Texture2D
+@export var key_k_upper: Texture2D
+@export var key_l_upper: Texture2D
+@export var key_m_upper: Texture2D
+@export var key_n_upper: Texture2D
+@export var key_o_upper: Texture2D
+@export var key_p_upper: Texture2D
+@export var key_q_upper: Texture2D
+@export var key_r_upper: Texture2D
+@export var key_s_upper: Texture2D
+@export var key_t_upper: Texture2D
+@export var key_u_upper: Texture2D
+@export var key_v_upper: Texture2D
+@export var key_w_upper: Texture2D
+@export var key_x_upper: Texture2D
+@export var key_y_upper: Texture2D
+@export var key_z_upper: Texture2D
