@@ -1,14 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://cipb74td5x87b"]
+[gd_scene format=3 uid="uid://cipb74td5x87b"]
 
 [ext_resource type="Script" uid="uid://dofhds2ttw30" path="res://remap_input_demo/remap_example.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://b0ll35eulteec" path="res://remap_input_demo/remap_input_row.tscn" id="1_1bvp3"]
 [ext_resource type="Script" uid="uid://bpt8as8jhyvp1" path="res://addons/godot_input_icons/input_icon_richtextlabel.gd" id="3_1bvp3"]
 [ext_resource type="Script" uid="uid://nei7ddo8bmn0" path="res://remap_input_demo/input_helper_warning_panel.gd" id="3_h2yge"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1386774367]
 metadata/_edit_vertical_guides_ = [960.0]
 
-[node name="RemapExample" type="Panel" parent="." node_paths=PackedStringArray("remap_control")]
+[node name="RemapExample" type="Panel" parent="." unique_id=576194271 node_paths=PackedStringArray("remap_control")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -28,7 +28,7 @@ remappable_inputs_dictionary = Dictionary[String, String]({
 "defend": "Defend"
 })
 
-[node name="VBoxContainer" type="VBoxContainer" parent="RemapExample"]
+[node name="VBoxContainer" type="VBoxContainer" parent="RemapExample" unique_id=449940580]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,25 +38,25 @@ offset_right = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RemapInputsLabel" type="Label" parent="RemapExample/VBoxContainer"]
+[node name="RemapInputsLabel" type="Label" parent="RemapExample/VBoxContainer" unique_id=1787624288]
 layout_mode = 2
 text = "Remap Inputs"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="RemapExample/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="RemapExample/VBoxContainer" unique_id=1386769070]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="InputRowsContainer" type="VBoxContainer" parent="RemapExample/VBoxContainer/ScrollContainer"]
+[node name="InputRowsContainer" type="VBoxContainer" parent="RemapExample/VBoxContainer/ScrollContainer" unique_id=466294151]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="RemapExample/VBoxContainer/ScrollContainer/InputRowsContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="RemapExample/VBoxContainer/ScrollContainer/InputRowsContainer" unique_id=1863404941]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="RemapInputPanel" type="Panel" parent="."]
+[node name="RemapInputPanel" type="Panel" parent="." unique_id=1701238291]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -71,7 +71,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 
-[node name="Label" type="Label" parent="RemapInputPanel"]
+[node name="Label" type="Label" parent="RemapInputPanel" unique_id=1328636005]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -83,7 +83,7 @@ offset_bottom = 29.5
 grow_horizontal = 2
 text = "Press any key..."
 
-[node name="InputHelperWarningPanel" type="Panel" parent="."]
+[node name="InputHelperWarningPanel" type="Panel" parent="." unique_id=809773860]
 visible = false
 offset_left = 58.0
 offset_top = 31.0
@@ -91,7 +91,7 @@ offset_right = 265.0
 offset_bottom = 128.0
 script = ExtResource("3_h2yge")
 
-[node name="Label" type="Label" parent="InputHelperWarningPanel"]
+[node name="Label" type="Label" parent="InputHelperWarningPanel" unique_id=2007465244]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -101,7 +101,7 @@ grow_vertical = 2
 text = "Enable input helper support Project Settings > Input Icons > Settings > Use Input Helper"
 autowrap_mode = 2
 
-[node name="RichTextExample" type="Panel" parent="."]
+[node name="RichTextExample" type="Panel" parent="." unique_id=512154456]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -117,7 +117,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="RichTextExample"]
+[node name="MarginContainer" type="MarginContainer" parent="RichTextExample" unique_id=342302010]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -129,10 +129,10 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="RichTextExample/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="RichTextExample/MarginContainer" unique_id=97462387]
 layout_mode = 2
 
-[node name="AttackRichText" type="RichTextLabel" parent="RichTextExample/MarginContainer/VBoxContainer"]
+[node name="AttackRichText" type="RichTextLabel" parent="RichTextExample/MarginContainer/VBoxContainer" unique_id=1317776950]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 bbcode_enabled = true
@@ -141,7 +141,7 @@ vertical_alignment = 1
 script = ExtResource("3_1bvp3")
 metadata/_custom_type_script = "uid://bpt8as8jhyvp1"
 
-[node name="DefendRichText" type="RichTextLabel" parent="RichTextExample/MarginContainer/VBoxContainer"]
+[node name="DefendRichText" type="RichTextLabel" parent="RichTextExample/MarginContainer/VBoxContainer" unique_id=899934180]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 bbcode_enabled = true
@@ -150,7 +150,7 @@ vertical_alignment = 1
 script = ExtResource("3_1bvp3")
 metadata/_custom_type_script = "uid://bpt8as8jhyvp1"
 
-[node name="ExampleHBox" type="VBoxContainer" parent="."]
+[node name="ExampleHBox" type="VBoxContainer" parent="." unique_id=474499093]
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -159,11 +159,11 @@ offset_right = 133.0
 offset_bottom = 20.0
 grow_vertical = 2
 
-[node name="RemapButton" type="Button" parent="ExampleHBox"]
+[node name="RemapButton" type="Button" parent="ExampleHBox" unique_id=775021446]
 layout_mode = 2
 text = "Remap Example"
 
-[node name="RichTextButton" type="Button" parent="ExampleHBox"]
+[node name="RichTextButton" type="Button" parent="ExampleHBox" unique_id=1632257207]
 layout_mode = 2
 text = "Rich Text Example"
 

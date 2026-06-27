@@ -15,6 +15,7 @@ This is a godot plugin that helps to display user registered actions and control
 - [Installation](#️-installation)
 - [Documentation](#-documentation)
 - [Contributing](#-contributing)
+- [Thanks](#-thanks)
 - [Changelog](#-changelog)
 - [License](#-license)
 
@@ -77,7 +78,7 @@ Notes:
 - Regular [BBCode](https://docs.godotengine.org/en/stable/tutorials/ui/bbcode_in_richtextlabel.html) works alongside tokens, e.g. `[b]Press[/b] [action:jump]`.
 - If an action has multiple bindings for a device, choose one with a trailing index: `[action:jump:1]` shows the second binding (defaults to `0`).
 - Unknown action tokens are flagged with a configuration warning in the editor.
-- Set the text in the inspector or from script — assigning `text` works, and C# callers can use `set_rich_input_text()`.
+- Set the text in the inspector or from script. Assigning `text` works, and C# callers can use `set_rich_input_text()`.
 - With [Input Helper Integration](#using-input-helper-integration) enabled, the label automatically re-renders when the active device changes (keyboard ↔ controller).
 
 ### Registering your own icons
@@ -112,6 +113,11 @@ See something you want or could improve upon? Make an issue or a PR! ✨
 ## Code Style & Recommendations
 
 - Follow the official [godot style guide conventions](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html)
+
+## 🙏 Thanks
+
+- [@omegaleo](https://github.com/omegaleo) for proposing and contributing the `InputIconRichTextLabel`
+- [Nathan Hoad](https://github.com/nathanhoad) for [godot input helper](https://github.com/nathanhoad/godot_input_helper), which powers the optional device and remap integration
 
 ## 📋 Changelog
 

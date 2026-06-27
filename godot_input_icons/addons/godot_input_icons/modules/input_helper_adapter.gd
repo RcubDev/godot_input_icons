@@ -35,12 +35,13 @@ func on_device_changed(device: String, device_index: int):
 	var device_id = input_helper_device_to_icon_helper_device(device)
 	_update_display_device_callback.callv([device_id])
 	
+# An empty action_name matches any action, for multi-action consumers.
 func on_keyboard_input_changed(action: String, input: InputEvent):
-	if action == action_name:
+	if action_name == "" or action == action_name:
 		_update_texture_callback.call()
-	
+
 func on_joypad_input_changed(action: String, input: InputEvent):
-	if action == action_name:
+	if action_name == "" or action == action_name:
 		_update_texture_callback.call()
 
 func on_joypad_changed(device_index: int, is_connected: bool):

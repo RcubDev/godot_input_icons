@@ -64,8 +64,8 @@ func set_action_property_value(value: Variant) -> void:
 	_update_texture()
 
 
-func _get_property_list() -> Array:
-	var properties = [get_action_property_dict()]
+func _get_property_list() -> Array[Dictionary]:
+	var properties: Array[Dictionary] = [get_action_property_dict()]
 	if is_input_helper_adapter_enabled:
 		InputHelperAdapter.add_adapter_properties(properties)
 	return properties
