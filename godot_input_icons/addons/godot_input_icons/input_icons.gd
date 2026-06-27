@@ -2,7 +2,10 @@
 extends EditorPlugin
 
 const InputMapIconInjector = preload("res://addons/godot_input_icons/modules/input_map_icon_injector.gd")
+const IconThemeBuilder = preload("res://addons/godot_input_icons/editor/icon_theme_builder.gd")
 var _icon_injector: Node = null
+var _theme_builder: Control = null
+var _theme_builder_button: Button = null
 
 const SETTINGS_CONFIGURATION: Dictionary = {
 	InputIconConstants.MAP_PATH_SETTING_NAME: {
@@ -38,6 +41,24 @@ func _enter_tree() -> void:
 	if ProjectSettings.get_setting(InputIconConstants.INJECT_INPUT_MAP_ICONS_SETTING_NAME, true):
 		_icon_injector = InputMapIconInjector.new()
 		add_child(_icon_injector)
+	_theme_builder = IconThemeBuilder.new()
+	_theme_builder_button = add_control_to_bottom_panel(_theme_builder, "Input Icons")
+	_theme_builder_button.visible = false
+
+
+func _handles(object: Object) -> bool:
+	return object is InputIconMap
+
+
+func _edit(object: Object) -> void:
+	if object is InputIconMap:
+		_theme_builder.set_undo_redo(get_undo_redo())
+		_theme_builder.edit_map(object)
+
+
+func _make_visible(visible: bool) -> void:
+	if _theme_builder_button:
+		_theme_builder_button.visible = visible
 
 
 static func initialize() -> void:
@@ -64,3 +85,7 @@ func _exit_tree() -> void:
 	if is_instance_valid(_icon_injector):
 		_icon_injector.queue_free()
 		_icon_injector = null
+	if is_instance_valid(_theme_builder):
+		remove_control_from_bottom_panel(_theme_builder)
+		_theme_builder.queue_free()
+		_theme_builder = null
