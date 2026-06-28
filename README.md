@@ -27,6 +27,10 @@ This is a godot plugin that helps to display user registered actions and control
 - **InputIconRichTextLabel**: A new control node that renders input icons inline with text using `[action:NAME]` tokens.
   - Mix action icons with regular BBCode text, with multiple actions per label
   - Each token resolves to the icon for the current display device
+- **InputIconOnScreenKeyboard**: A controller-friendly on-screen keyboard rendered with your mapped key icons.
+  - Letters, numbers, two symbol pages, and an optional uppercase (Shift) page, with text fallback for unmapped keys
+  - Auto-pops over a focused `LineEdit`/`TextEdit` when a controller is the active device and types into it
+  - Full controller scheme using the face buttons, bumpers, and triggers (delete, space, cursor, shift, submit, cancel)
 - **InputIconResolver**: A godot object that can be instantiated to resolve input icons at runtime
   - Supports modifier keys (shift, ctrl, etc)
 - **Remap Input Demo**: A demo of how to use this plugin to remap inputs and display their icons in game
@@ -80,6 +84,32 @@ Notes:
 - Unknown action tokens are flagged with a configuration warning in the editor.
 - Set the text in the inspector or from script. Assigning `text` works, and C# callers can use `set_rich_input_text()`.
 - With [Input Helper Integration](#using-input-helper-integration) enabled, the label automatically re-renders when the active device changes (keyboard ↔ controller).
+
+### Using the On-Screen Keyboard
+
+The `InputIconOnScreenKeyboard` is a controller-friendly virtual keyboard rendered with your mapped key icons (keys without an icon fall back to text). There are two ways to use it.
+
+**Auto-popup (default).** When the plugin is enabled it registers an autoload (`InputIconKeyboard`) that watches focus. When a `LineEdit` or `TextEdit` gains focus while a controller is the active device, the keyboard pops up and routes input straight into that field, with a preview line showing the text as you type. Submitting or cancelling returns focus to the field without reopening, so you can navigate away to the next control naturally.
+
+Controller scheme while the keyboard is open:
+
+- **A / accept**: press the focused key
+- **X** (left face): delete
+- **Y** (top face): space
+- **Left / Right bumper**: move the caret
+- **Left trigger**: shift the next key
+- **Start**: submit
+- **B**: cancel
+
+Opt a field out with `field.set_meta("disable_on_screen_keyboard", true)` or by adding it to the `input_icon_no_keyboard` group. On touch platforms the OS keyboard is suppressed while ours is up.
+
+**Standalone.** Add an `InputIconOnScreenKeyboard` node to your own UI. Read the typed text from its `text` property and connect to its `text_changed(text)` and `submitted(text)` signals. Exports: `key_height`, `key_separation`, and `show_preview`.
+
+The uppercase and symbol keys come from the optional `Uppercase Letters` and `Symbols` groups on your keyboard icon map; assign them in the Input Icons editor panel (text fallback is used until you do). The Shift key only appears once at least one uppercase letter is assigned.
+
+Settings under `Project > Project Settings > Input Icons > Settings`:
+
+- **Auto On Screen Keyboard**: enable or disable the auto-popup autoload.
 
 ### Registering your own icons
 

@@ -16,6 +16,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
   - Automatically re-renders on device change when Input Helper integration is enabled
   - Originally proposed and contributed by [@omegaleo](https://github.com/omegaleo). Thank you!
 - `push_warnings` parameter on `InputIconResolver.get_icon` to optionally silence resolver warnings (defaults to `true`)
+- `InputIconOnScreenKeyboard` a controller-friendly on-screen keyboard rendered with your mapped key icons
+  - Letters, numbers, two symbol pages, and an optional uppercase (Shift) page, with text fallback for unmapped keys
+  - Auto-pops over a focused `LineEdit`/`TextEdit` when a controller is the active device (toggle with the `auto_on_screen_keyboard` setting); opt a field out via the `input_icon_no_keyboard` group or a `disable_on_screen_keyboard` meta
+  - Full controller scheme using the face buttons, bumpers, and triggers (delete, space, cursor, shift, submit, cancel)
+- `Uppercase Letters` and `Symbols` icon groups on `KeyboardIcons` for the keyboard's shift and symbol pages
+- The Input Icons editor panel now opens automatically when you edit an icon map
 
 ### Changed
 
