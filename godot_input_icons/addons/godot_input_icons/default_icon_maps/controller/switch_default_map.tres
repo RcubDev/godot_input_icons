@@ -1,43 +1,98 @@
 [gd_resource type="Resource" script_class="ControllerIcons" format=3 uid="uid://dmpbvlphvxjm1"]
 
-[ext_resource type="Texture2D" uid="uid://b71d3a27bua6w" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/switch/back_button.tres" id="1_qw2ph"]
-[ext_resource type="Texture2D" uid="uid://dlu531dkjooda" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/generic/dpad_down.tres" id="2_hc7s4"]
-[ext_resource type="Texture2D" uid="uid://cx2378k40l7ws" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/generic/dpad_left.tres" id="3_7qp3y"]
-[ext_resource type="Texture2D" uid="uid://i6vie7nqpjj0" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/generic/dpad_right.tres" id="4_pgdp7"]
-[ext_resource type="Texture2D" uid="uid://dutb2wrahr421" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/generic/dpad_up.tres" id="5_5cj4o"]
-[ext_resource type="Texture2D" uid="uid://pv32nkptq3cu" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/switch/face_button_bottom.tres" id="6_7vdc5"]
-[ext_resource type="Texture2D" uid="uid://bw5wi4qbrmfjo" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/switch/face_button_left.tres" id="7_61wsw"]
-[ext_resource type="Texture2D" uid="uid://diswfyc65kk56" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/switch/face_button_right.tres" id="8_qw2ph"]
-[ext_resource type="Texture2D" uid="uid://b8g2g66xp4pfb" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/switch/face_button_top.tres" id="9_auv65"]
-[ext_resource type="Texture2D" uid="uid://bp4fkb4gu7wto" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/switch/guide_button.tres" id="10_auv65"]
-[ext_resource type="Texture2D" uid="uid://55tig6ek7hn4" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/generic/left_bumper.tres" id="10_gdipj"]
-[ext_resource type="Texture2D" uid="uid://wab8wi0hlxk1" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/generic/left_stick_in.tres" id="11_yjoyw"]
-[ext_resource type="Texture2D" uid="uid://caqvn27uuxya8" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/generic/left_trigger.tres" id="12_100j6"]
-[ext_resource type="Texture2D" uid="uid://71cc2hi0l6ay" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/generic/right_bumper.tres" id="13_qpaly"]
-[ext_resource type="Texture2D" uid="uid://cbtrgtsthgsdj" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/generic/right_stick_in.tres" id="14_qaanc"]
-[ext_resource type="Texture2D" uid="uid://cme2bf21f3832" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/switch/misc1_button.tres" id="14_tv1ar"]
-[ext_resource type="Texture2D" uid="uid://ctgx6fbuad31c" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/generic/right_trigger.tres" id="15_23klv"]
+[ext_resource type="Texture2D" uid="uid://o1ng1yyo48bk" path="res://addons/godot_input_icons/assets/kenney_input-prompts-pixel-16/Tilemap/tilemap_packed.png" id="1_dmle6"]
 [ext_resource type="Script" uid="uid://db0gxldvhci3p" path="res://addons/godot_input_icons/resources/controller_icons.gd" id="16_pb7p7"]
-[ext_resource type="Texture2D" uid="uid://bftojjc32daf1" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/switch/start_button.tres" id="19_tkkx4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4q0e"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(64, 336, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xe34s"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(48, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgvxe"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(64, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dxol"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(32, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7kv2"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(16, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wcvmk"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(144, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftj8r"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(176, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyuw3"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(128, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lxpf"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(160, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6tkm"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(32, 336, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qysl8"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(112, 305, 16, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lepm4"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(256, 208, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yind"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(176, 273, 16, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3ikn"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(193, 337, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vdc5"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(128, 305, 16, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61wsw"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(256, 240, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qw2ph"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(192, 273, 16, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_auv65"]
+atlas = ExtResource("1_dmle6")
+region = Rect2(80, 336, 16, 16)
 
 [resource]
 script = ExtResource("16_pb7p7")
-face_button_up = ExtResource("9_auv65")
-face_button_right = ExtResource("8_qw2ph")
-face_button_down = ExtResource("6_7vdc5")
-face_button_left = ExtResource("7_61wsw")
-left_bumper = ExtResource("10_gdipj")
-left_trigger = ExtResource("12_100j6")
-right_bumper = ExtResource("13_qpaly")
-right_trigger = ExtResource("15_23klv")
-dpad_up = ExtResource("5_5cj4o")
-dpad_right = ExtResource("4_pgdp7")
-dpad_down = ExtResource("2_hc7s4")
-dpad_left = ExtResource("3_7qp3y")
-start_button = ExtResource("19_tkkx4")
-back_button = ExtResource("1_qw2ph")
-left_stick_in = ExtResource("11_yjoyw")
-right_stick_in = ExtResource("14_qaanc")
-guide_button = ExtResource("10_auv65")
-misc1 = ExtResource("14_tv1ar")
+face_button_up = SubResource("AtlasTexture_7lxpf")
+face_button_right = SubResource("AtlasTexture_lyuw3")
+face_button_down = SubResource("AtlasTexture_wcvmk")
+face_button_left = SubResource("AtlasTexture_ftj8r")
+left_bumper = SubResource("AtlasTexture_qysl8")
+left_trigger = SubResource("AtlasTexture_3yind")
+right_bumper = SubResource("AtlasTexture_7vdc5")
+right_trigger = SubResource("AtlasTexture_qw2ph")
+dpad_up = SubResource("AtlasTexture_t7kv2")
+dpad_right = SubResource("AtlasTexture_2dxol")
+dpad_down = SubResource("AtlasTexture_xe34s")
+dpad_left = SubResource("AtlasTexture_sgvxe")
+start_button = SubResource("AtlasTexture_auv65")
+back_button = SubResource("AtlasTexture_p4q0e")
+left_stick_in = SubResource("AtlasTexture_lepm4")
+right_stick_in = SubResource("AtlasTexture_61wsw")
+guide_button = SubResource("AtlasTexture_m6tkm")
+misc1 = SubResource("AtlasTexture_i3ikn")
 metadata/_custom_type_script = "uid://db0gxldvhci3p"

@@ -7,8 +7,15 @@
 [ext_resource type="Resource" uid="uid://y8gohpdojpcc" path="res://addons/godot_input_icons/default_icon_maps/controller/playstation_default_map.tres" id="4_1k3pg"]
 [ext_resource type="Script" uid="uid://dth3wa8g0tv2g" path="res://addons/godot_input_icons/resources/input_icon_map.gd" id="4_w2iqv"]
 [ext_resource type="Resource" uid="uid://bai5y1ydlgfrt" path="res://addons/godot_input_icons/default_icon_maps/controller/generic_default_map.tres" id="5_cut6n"]
-[ext_resource type="Texture2D" uid="uid://c4xxgupjruku7" path="res://addons/godot_input_icons/assets/input_atlas_textures/controller/unmapped_controller_button.tres" id="8_ooyca"]
-[ext_resource type="Texture2D" uid="uid://bdlxdlo2usvt8" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/unmapped_key.tres" id="9_1k3pg"]
+[ext_resource type="Texture2D" uid="uid://o1ng1yyo48bk" path="res://addons/godot_input_icons/assets/kenney_input-prompts-pixel-16/Tilemap/tilemap_packed.png" id="8_ooyca"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1k3pg"]
+atlas = ExtResource("8_ooyca")
+region = Rect2(192, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cut6n"]
+atlas = ExtResource("8_ooyca")
+region = Rect2(464, 224, 16, 16)
 
 [resource]
 script = ExtResource("4_w2iqv")
@@ -19,6 +26,6 @@ controller_icons = Dictionary[int, ExtResource("1_el15c")]({
 3: ExtResource("4_1k3pg"),
 4: ExtResource("5_cut6n")
 })
-unmapped_key = ExtResource("9_1k3pg")
-unmapped_controller_button = ExtResource("8_ooyca")
+unmapped_key = SubResource("AtlasTexture_cut6n")
+unmapped_controller_button = SubResource("AtlasTexture_1k3pg")
 metadata/_custom_type_script = "uid://dth3wa8g0tv2g"

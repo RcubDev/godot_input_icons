@@ -1,7 +1,0 @@
-[gd_resource type="AtlasTexture" format=3 uid="uid://dkd1p0ei3ikvl"]
-
-[ext_resource type="Texture2D" uid="uid://o1ng1yyo48bk" path="res://addons/godot_input_icons/assets/kenney_input-prompts-pixel-16/Tilemap/tilemap_packed.png" id="1_lgk2v"]
-
-[resource]
-atlas = ExtResource("1_lgk2v")
-region = Rect2(368, 176, 16, 16)

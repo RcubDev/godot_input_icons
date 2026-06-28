@@ -17,6 +17,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
   - Originally proposed and contributed by [@omegaleo](https://github.com/omegaleo). Thank you!
 - `push_warnings` parameter on `InputIconResolver.get_icon` to optionally silence resolver warnings (defaults to `true`)
 
+### Changed
+
+- The default icon maps now bake their atlas regions as inline sub-resources instead of referencing standalone `AtlasTexture` files, cutting the addon from ~140 small resource files down to the map files themselves
+
+### Removed
+
+- The standalone per-icon `AtlasTexture` `.tres` files under `assets/input_atlas_textures/`. **Breaking:** if you referenced one of these files directly (for example on a `TextureRect`), repoint it to an inline region or to the icon map. The bundled default maps and demo scene were updated automatically.
+
 ## [0.0.1] - 2025-04-30
 
 ### Added
