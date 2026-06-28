@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://d2a2relwnivg5" path="res://addons/godot_input_icons/input_icon_texture_rect.gd" id="2_8k1rm"]
 [ext_resource type="Texture2D" uid="uid://o1ng1yyo48bk" path="res://addons/godot_input_icons/assets/kenney_input-prompts-pixel-16/Tilemap/tilemap_packed.png" id="2_spncc"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_space"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_p75om"]
 atlas = ExtResource("2_spncc")
 region = Rect2(272, 192, 16, 16)
 
@@ -46,7 +46,7 @@ offset_top = -18.0
 offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("AtlasTexture_space")
+texture = SubResource("AtlasTexture_p75om")
 stretch_mode = 5
 script = ExtResource("2_8k1rm")
 action_name = &"attack"

@@ -8,27 +8,47 @@
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1386774367]
 metadata/_edit_vertical_guides_ = [960.0]
 
-[node name="RemapExample" type="Panel" parent="." unique_id=576194271 node_paths=PackedStringArray("remap_control")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -169.0
-offset_top = -119.0
-offset_right = 169.0
-offset_bottom = 119.0
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=989946216]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=931853655]
+layout_mode = 2
+
+[node name="ExampleHBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=474499093]
+layout_mode = 2
+alignment = 1
+
+[node name="RemapButton" type="Button" parent="MarginContainer/HBoxContainer/ExampleHBox" unique_id=775021446]
+layout_mode = 2
+text = "Remap Example"
+
+[node name="RichTextButton" type="Button" parent="MarginContainer/HBoxContainer/ExampleHBox" unique_id=1632257207]
+layout_mode = 2
+text = "Rich Text Example"
+
+[node name="VirtualKeyboardButton" type="Button" parent="MarginContainer/HBoxContainer/ExampleHBox" unique_id=1136471017]
+layout_mode = 2
+text = "Virtual Keyboard"
+
+[node name="RemapExample" type="Panel" parent="MarginContainer/HBoxContainer" unique_id=576194271 node_paths=PackedStringArray("remap_control")]
+custom_minimum_size = Vector2(338, 238)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("1_0xm2m")
 remap_input_row = ExtResource("1_1bvp3")
-remap_control = NodePath("../RemapInputPanel")
+remap_control = NodePath("../../../RemapInputPanel")
 remappable_inputs_dictionary = Dictionary[String, String]({
 "attack": "Attack",
 "defend": "Defend"
 })
 
-[node name="VBoxContainer" type="VBoxContainer" parent="RemapExample" unique_id=449940580]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/RemapExample" unique_id=449940580]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,26 +58,116 @@ offset_right = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RemapInputsLabel" type="Label" parent="RemapExample/VBoxContainer" unique_id=1787624288]
+[node name="RemapInputsLabel" type="Label" parent="MarginContainer/HBoxContainer/RemapExample/VBoxContainer" unique_id=1787624288]
 layout_mode = 2
 text = "Remap Inputs"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="RemapExample/VBoxContainer" unique_id=1386769070]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/RemapExample/VBoxContainer" unique_id=1386769070]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="InputRowsContainer" type="VBoxContainer" parent="RemapExample/VBoxContainer/ScrollContainer" unique_id=466294151]
+[node name="InputRowsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/RemapExample/VBoxContainer/ScrollContainer" unique_id=466294151]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="RemapExample/VBoxContainer/ScrollContainer/InputRowsContainer" unique_id=1863404941]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/RemapExample/VBoxContainer/ScrollContainer/InputRowsContainer" unique_id=1863404941]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
+[node name="InputHelperWarningPanel" type="Panel" parent="MarginContainer/HBoxContainer" unique_id=809773860]
+visible = false
+custom_minimum_size = Vector2(338, 238)
+layout_mode = 2
+script = ExtResource("3_h2yge")
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/InputHelperWarningPanel" unique_id=2007465244]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Enable input helper support Project Settings > Input Icons > Settings > Use Input Helper"
+autowrap_mode = 2
+
+[node name="RichTextExample" type="Panel" parent="MarginContainer/HBoxContainer" unique_id=512154456]
+visible = false
+custom_minimum_size = Vector2(338, 238)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/RichTextExample" unique_id=342302010]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/RichTextExample/MarginContainer" unique_id=97462387]
+layout_mode = 2
+
+[node name="AttackRichText" type="RichTextLabel" parent="MarginContainer/HBoxContainer/RichTextExample/MarginContainer/VBoxContainer" unique_id=1317776950]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+bbcode_enabled = true
+text = "Use [action:attack] or [action:attack:1] to attack!"
+vertical_alignment = 1
+script = ExtResource("3_1bvp3")
+metadata/_custom_type_script = "uid://bpt8as8jhyvp1"
+
+[node name="DefendRichText" type="RichTextLabel" parent="MarginContainer/HBoxContainer/RichTextExample/MarginContainer/VBoxContainer" unique_id=899934180]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+bbcode_enabled = true
+text = "Use [action:defend] to defend"
+vertical_alignment = 1
+script = ExtResource("3_1bvp3")
+metadata/_custom_type_script = "uid://bpt8as8jhyvp1"
+
+[node name="VirtualKeyboardExample" type="Panel" parent="MarginContainer/HBoxContainer" unique_id=2565992]
+visible = false
+custom_minimum_size = Vector2(338, 238)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/VirtualKeyboardExample" unique_id=129941123]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VirtualKeyboardExample/MarginContainer" unique_id=375804214]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/VirtualKeyboardExample/MarginContainer/VBoxContainer" unique_id=1373489352]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "What is your name?"
+vertical_alignment = 1
+
+[node name="NameLineEdit" type="LineEdit" parent="MarginContainer/HBoxContainer/VirtualKeyboardExample/MarginContainer/VBoxContainer" unique_id=2136553594]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+placeholder_text = "my name is..."
+
 [node name="RemapInputPanel" type="Panel" parent="." unique_id=1701238291]
 visible = false
+custom_minimum_size = Vector2(188, 59)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -83,93 +193,16 @@ offset_bottom = 29.5
 grow_horizontal = 2
 text = "Press any key..."
 
-[node name="InputHelperWarningPanel" type="Panel" parent="." unique_id=809773860]
-visible = false
-offset_left = 58.0
-offset_top = 31.0
-offset_right = 265.0
-offset_bottom = 128.0
-script = ExtResource("3_h2yge")
-
-[node name="Label" type="Label" parent="InputHelperWarningPanel" unique_id=2007465244]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Enable input helper support Project Settings > Input Icons > Settings > Use Input Helper"
-autowrap_mode = 2
-
-[node name="RichTextExample" type="Panel" parent="." unique_id=512154456]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -169.0
-offset_top = -119.0
-offset_right = 169.0
-offset_bottom = 119.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="RichTextExample" unique_id=342302010]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="RichTextExample/MarginContainer" unique_id=97462387]
-layout_mode = 2
-
-[node name="AttackRichText" type="RichTextLabel" parent="RichTextExample/MarginContainer/VBoxContainer" unique_id=1317776950]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-bbcode_enabled = true
-text = "Use [action:attack] or [action:attack:1] to attack!"
-vertical_alignment = 1
-script = ExtResource("3_1bvp3")
-metadata/_custom_type_script = "uid://bpt8as8jhyvp1"
-
-[node name="DefendRichText" type="RichTextLabel" parent="RichTextExample/MarginContainer/VBoxContainer" unique_id=899934180]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-bbcode_enabled = true
-text = "Use [action:defend] to defend"
-vertical_alignment = 1
-script = ExtResource("3_1bvp3")
-metadata/_custom_type_script = "uid://bpt8as8jhyvp1"
-
-[node name="ExampleHBox" type="VBoxContainer" parent="." unique_id=474499093]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -20.0
-offset_right = 133.0
-offset_bottom = 20.0
-grow_vertical = 2
-
-[node name="RemapButton" type="Button" parent="ExampleHBox" unique_id=775021446]
-layout_mode = 2
-text = "Remap Example"
-
-[node name="RichTextButton" type="Button" parent="ExampleHBox" unique_id=1632257207]
-layout_mode = 2
-text = "Rich Text Example"
-
-[connection signal="ready" from="RemapExample" to="RemapExample" method="show"]
-[connection signal="ready" from="RichTextExample" to="RichTextExample" method="hide"]
-[connection signal="pressed" from="ExampleHBox/RemapButton" to="RemapExample" method="show"]
-[connection signal="pressed" from="ExampleHBox/RemapButton" to="RichTextExample" method="hide"]
-[connection signal="pressed" from="ExampleHBox/RichTextButton" to="RemapExample" method="hide"]
-[connection signal="pressed" from="ExampleHBox/RichTextButton" to="RichTextExample" method="show"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ExampleHBox/RemapButton" to="MarginContainer/HBoxContainer/RemapExample" method="show"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ExampleHBox/RemapButton" to="MarginContainer/HBoxContainer/RichTextExample" method="hide"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ExampleHBox/RemapButton" to="MarginContainer/HBoxContainer/VirtualKeyboardExample" method="hide"]
+[connection signal="ready" from="MarginContainer/HBoxContainer/ExampleHBox/RemapButton" to="MarginContainer/HBoxContainer/ExampleHBox/RemapButton" method="grab_focus"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ExampleHBox/RichTextButton" to="MarginContainer/HBoxContainer/RemapExample" method="hide"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ExampleHBox/RichTextButton" to="MarginContainer/HBoxContainer/RichTextExample" method="show"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ExampleHBox/RichTextButton" to="MarginContainer/HBoxContainer/VirtualKeyboardExample" method="hide"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ExampleHBox/VirtualKeyboardButton" to="MarginContainer/HBoxContainer/RemapExample" method="hide"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ExampleHBox/VirtualKeyboardButton" to="MarginContainer/HBoxContainer/RichTextExample" method="hide"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/ExampleHBox/VirtualKeyboardButton" to="MarginContainer/HBoxContainer/VirtualKeyboardExample" method="show"]
+[connection signal="ready" from="MarginContainer/HBoxContainer/RemapExample" to="MarginContainer/HBoxContainer/RemapExample" method="show"]
+[connection signal="ready" from="MarginContainer/HBoxContainer/RichTextExample" to="MarginContainer/HBoxContainer/RichTextExample" method="hide"]
+[connection signal="ready" from="MarginContainer/HBoxContainer/VirtualKeyboardExample" to="MarginContainer/HBoxContainer/VirtualKeyboardExample" method="hide"]
