@@ -63,20 +63,9 @@ extends Resource
 @export var key_page_down: Texture2D
 @export var key_insert: Texture2D
 @export var key_print: Texture2D
-@export var key_comma: Texture2D
-@export var key_period: Texture2D
 @export var key_delete: Texture2D
-@export var key_apostrophe: Texture2D
-@export var key_semicolon: Texture2D
-@export var key_bracketleft: Texture2D
-@export var key_bracketright: Texture2D
-@export var key_minus: Texture2D
-@export var key_equal: Texture2D
-@export var key_slash: Texture2D
-@export var key_backslash: Texture2D
 @export var key_backspace: Texture2D
 @export var key_enter: Texture2D
-@export var key_quoteleft: Texture2D
 
 
 @export_group("Modifiers")
@@ -137,3 +126,39 @@ extends Resource
 @export var key_x_upper: Texture2D
 @export var key_y_upper: Texture2D
 @export var key_z_upper: Texture2D
+
+# Optional symbol glyphs for the on-screen keyboard's symbols pages. Keys without
+# an assigned icon fall back to their text label.
+@export_group("Symbols")
+@export var key_exclaim: Texture2D
+@export var key_at: Texture2D
+@export var key_hash: Texture2D
+@export var key_dollar: Texture2D
+@export var key_percent: Texture2D
+@export var key_caret: Texture2D
+@export var key_ampersand: Texture2D
+@export var key_asterisk: Texture2D
+@export var key_paren_left: Texture2D
+@export var key_paren_right: Texture2D
+@export var key_minus: Texture2D
+@export var key_underscore: Texture2D
+@export var key_plus: Texture2D
+@export var key_equal: Texture2D
+@export var key_bracketleft: Texture2D
+@export var key_bracketright: Texture2D
+@export var key_brace_left: Texture2D
+@export var key_brace_right: Texture2D
+@export var key_backslash: Texture2D
+@export var key_pipe: Texture2D
+@export var key_semicolon: Texture2D
+@export var key_colon: Texture2D
+@export var key_apostrophe: Texture2D
+@export var key_quote: Texture2D
+@export var key_comma: Texture2D
+@export var key_period: Texture2D
+@export var key_slash: Texture2D
+@export var key_question: Texture2D
+@export var key_less: Texture2D
+@export var key_greater: Texture2D
+@export var key_tilde: Texture2D
+@export var key_quoteleft: Texture2D
