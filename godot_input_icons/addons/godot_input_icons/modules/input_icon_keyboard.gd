@@ -15,6 +15,7 @@ var _keyboard: InputIconOnScreenKeyboard = null
 var _target: Control = null
 var _ignore_focus: Control = null
 var _restore_virtual_keyboard: bool = false
+var _left_trigger_down: bool = false
 
 func _ready() -> void:
 	_enabled = ProjectSettings.get_setting(InputIconConstants.AUTO_KEYBOARD_SETTING_NAME, true)
@@ -69,7 +70,7 @@ func _input(event: InputEvent) -> void:
 	if _controller_active != was_controller:
 		_on_device_changed()
 	# Controller shortcuts while the keyboard is open: left deletes, top spaces,
-	# Start submits, B cancels.
+	# bumpers move the caret, Start submits, B cancels.
 	if _target != null and event is InputEventJoypadButton and event.pressed:
 		if event.button_index == JOY_BUTTON_X:
 			_keyboard.backspace()
@@ -77,12 +78,25 @@ func _input(event: InputEvent) -> void:
 		elif event.button_index == JOY_BUTTON_Y:
 			_keyboard.insert_space()
 			get_viewport().set_input_as_handled()
+		elif event.button_index == JOY_BUTTON_LEFT_SHOULDER:
+			_keyboard.cursor_left()
+			get_viewport().set_input_as_handled()
+		elif event.button_index == JOY_BUTTON_RIGHT_SHOULDER:
+			_keyboard.cursor_right()
+			get_viewport().set_input_as_handled()
 		elif event.button_index == JOY_BUTTON_START:
 			_keyboard.submit()
 			get_viewport().set_input_as_handled()
 		elif event.button_index == JOY_BUTTON_B:
 			_close(true)
 			get_viewport().set_input_as_handled()
+	# Left trigger arms a one-shot shift for the next key (edge-detected).
+	if _target != null and event is InputEventJoypadMotion and event.axis == JOY_AXIS_TRIGGER_LEFT:
+		var pressed: bool = event.axis_value > 0.5
+		if pressed and not _left_trigger_down:
+			_keyboard.toggle_shift_once()
+			get_viewport().set_input_as_handled()
+		_left_trigger_down = pressed
 
 func _on_device_changed() -> void:
 	if _controller_active:
@@ -126,9 +140,11 @@ func _open(field: Control) -> void:
 	_restore_virtual_keyboard = field.virtual_keyboard_enabled
 	field.virtual_keyboard_enabled = false
 	DisplayServer.virtual_keyboard_hide()
+	_keyboard.multiline = field is TextEdit
 	_keyboard.text = field.text
 	_layer.visible = true
-	_keyboard.focus_first()
+	# Deferred so the grab survives the in-progress focus change that opened us.
+	_keyboard.focus_first.call_deferred()
 
 func _close(return_focus: bool) -> void:
 	var field := _target
@@ -144,17 +160,20 @@ func _on_keyboard_text_changed(text: String) -> void:
 	if not is_instance_valid(_target):
 		return
 	_target.text = text
-	_move_caret_to_end(_target)
+	_apply_caret(_target, _keyboard.caret)
 
 func _on_keyboard_submitted(_text: String) -> void:
-	_close(true)
+	# Drop focus on submit so re-focusing the field reopens the keyboard.
+	_close(false)
+	get_viewport().gui_release_focus()
 
-func _move_caret_to_end(field: Control) -> void:
+## Mirrors the keyboard's caret index onto the field (linear index for LineEdit,
+## line + column for TextEdit).
+func _apply_caret(field: Control, index: int) -> void:
 	if field is LineEdit:
-		var line_edit := field as LineEdit
-		line_edit.caret_column = line_edit.text.length()
+		(field as LineEdit).caret_column = index
 	elif field is TextEdit:
 		var text_edit := field as TextEdit
-		var last_line: int = text_edit.get_line_count() - 1
-		text_edit.set_caret_line(last_line)
-		text_edit.set_caret_column(text_edit.get_line(last_line).length())
+		var before: String = text_edit.text.substr(0, index)
+		text_edit.set_caret_line(before.count("\n"))
+		text_edit.set_caret_column(index - (before.rfind("\n") + 1))
