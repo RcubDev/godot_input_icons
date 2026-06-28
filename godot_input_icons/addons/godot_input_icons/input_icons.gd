@@ -70,6 +70,9 @@ func _edit(object: Object) -> void:
 func _make_visible(visible: bool) -> void:
 	if _theme_builder_button:
 		_theme_builder_button.visible = visible
+	# Auto-open the bottom panel when an InputIconMap is selected.
+	if visible:
+		make_bottom_panel_item_visible(_theme_builder)
 
 
 static func initialize() -> void:
