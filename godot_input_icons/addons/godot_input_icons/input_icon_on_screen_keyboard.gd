@@ -430,6 +430,12 @@ func cursor_left() -> void:
 func cursor_right() -> void:
 	_move_caret(1)
 
+## Resets to the default letters page (e.g. when the keyboard is hidden).
+func reset_page() -> void:
+	if _page != "letters":
+		_page = "letters"
+		_rebuild()
+
 ## Moves focus to the first key (e.g. when the keyboard is shown).
 func focus_first() -> void:
 	if _first_button:

@@ -11,6 +11,7 @@ const NO_KEYBOARD_GROUP := "input_icon_no_keyboard"
 var _enabled: bool = true
 var _controller_active: bool = false
 var _layer: CanvasLayer = null
+var _panel: PanelContainer = null
 var _keyboard: InputIconOnScreenKeyboard = null
 var _target: Control = null
 var _ignore_focus: Control = null
@@ -30,21 +31,23 @@ func _build_layer() -> void:
 	add_child(_layer)
 
 	# Hug the keyboard's content and sit bottom-center rather than stretching.
-	var panel := PanelContainer.new()
-	panel.anchor_left = 0.5
-	panel.anchor_right = 0.5
-	panel.anchor_top = 1.0
-	panel.anchor_bottom = 1.0
-	panel.offset_bottom = -24
-	panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	panel.grow_vertical = Control.GROW_DIRECTION_BEGIN
-	_layer.add_child(panel)
+	_panel = PanelContainer.new()
+	_panel.anchor_left = 0.5
+	_panel.anchor_right = 0.5
+	_panel.anchor_top = 1.0
+	_panel.anchor_bottom = 1.0
+	_panel.offset_bottom = -24
+	_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	_panel.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	_layer.add_child(_panel)
 
 	_keyboard = InputIconOnScreenKeyboard.new()
 	_keyboard.text_changed.connect(_on_keyboard_text_changed)
 	_keyboard.submitted.connect(_on_keyboard_submitted)
-	panel.add_child(_keyboard)
-	_layer.visible = false
+	_panel.add_child(_keyboard)
+	# Toggle the Control's own visibility (not the CanvasLayer's) so the hidden
+	# keyboard stops capturing mouse input and leaves the focus chain.
+	_panel.visible = false
 
 	get_viewport().size_changed.connect(_update_keyboard_bounds)
 	_update_keyboard_bounds()
@@ -142,14 +145,15 @@ func _open(field: Control) -> void:
 	DisplayServer.virtual_keyboard_hide()
 	_keyboard.multiline = field is TextEdit
 	_keyboard.text = field.text
-	_layer.visible = true
+	_panel.visible = true
 	# Deferred so the grab survives the in-progress focus change that opened us.
 	_keyboard.focus_first.call_deferred()
 
 func _close(return_focus: bool) -> void:
 	var field := _target
 	_target = null
-	_layer.visible = false
+	_panel.visible = false
+	_keyboard.reset_page()
 	if is_instance_valid(field):
 		field.virtual_keyboard_enabled = _restore_virtual_keyboard
 		if return_focus:
@@ -163,9 +167,9 @@ func _on_keyboard_text_changed(text: String) -> void:
 	_apply_caret(_target, _keyboard.caret)
 
 func _on_keyboard_submitted(_text: String) -> void:
-	# Drop focus on submit so re-focusing the field reopens the keyboard.
-	_close(false)
-	get_viewport().gui_release_focus()
+	# Return focus to the field without reopening, so you can navigate away to the
+	# next control naturally (coming back to the field reopens the keyboard).
+	_close(true)
 
 ## Mirrors the keyboard's caret index onto the field (linear index for LineEdit,
 ## line + column for TextEdit).
