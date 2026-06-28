@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://fhx2gw0cvhl2" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/numerics/key_9.tres" id="10_lj4e5"]
 [ext_resource type="Texture2D" uid="uid://hv25c0lhhfnu" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/letters/key_a.tres" id="11_xoq0m"]
 [ext_resource type="Texture2D" uid="uid://boabrgrswgf1k" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/modifiers/key_alt.tres" id="12_ifcyg"]
+[ext_resource type="Texture2D" uid="uid://o1ng1yyo48bk" path="res://addons/godot_input_icons/assets/kenney_input-prompts-pixel-16/Tilemap/tilemap_packed.png" id="12_y3typ"]
 [ext_resource type="Texture2D" uid="uid://dxod825q1ar6b" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/arrow_keys/key_arrow_down.tres" id="13_aub27"]
 [ext_resource type="Texture2D" uid="uid://vuh6tkhybons" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/special_keys/key_apostrophe.tres" id="13_ifcyg"]
 [ext_resource type="Texture2D" uid="uid://ccsos03s4wkdn" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/arrow_keys/key_arrow_left.tres" id="14_31p3n"]
@@ -86,6 +87,110 @@
 [ext_resource type="Texture2D" uid="uid://b2j6tl0dqmdk5" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/special_keys/key_semicolon.tres" id="68_x22e0"]
 [ext_resource type="Texture2D" uid="uid://i1bw1t5l8hxv" path="res://addons/godot_input_icons/assets/input_atlas_textures/keyboard/special_keys/key_slash.tres" id="70_hqlef"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qj0kp"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(288, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b03kh"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(368, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4av1"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(336, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2a1ot"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(320, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p75om"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(304, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elqu5"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(336, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x22e0"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(352, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqlef"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(368, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6jtx"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(384, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6q6c"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(384, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5r14m"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(400, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0te8o"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(416, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w77xd"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(400, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pr5us"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(384, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ja6iw"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(400, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbfeb"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(416, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1al11"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(272, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pyqja"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(320, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inip6"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(304, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vji2b"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(336, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oraef"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(368, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vga0c"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(352, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffuk1"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(288, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycekv"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(320, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivu6d"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(352, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unbee"]
+atlas = ExtResource("12_y3typ")
+region = Rect2(304, 64, 16, 16)
+
 [resource]
 script = ExtResource("64_i1xrx")
 mouse_left_click = ExtResource("61_d8j0h")
@@ -139,20 +244,9 @@ key_page_up = ExtResource("54_6vjxs")
 key_page_down = ExtResource("53_rrmd5")
 key_insert = ExtResource("45_2gqgf")
 key_print = ExtResource("56_rfj6u")
-key_comma = ExtResource("21_31p3n")
-key_period = ExtResource("55_71vli")
 key_delete = ExtResource("24_7bceu")
-key_apostrophe = ExtResource("13_ifcyg")
-key_semicolon = ExtResource("68_x22e0")
-key_bracketleft = ExtResource("21_qj0kp")
-key_bracketright = ExtResource("22_b03kh")
-key_minus = ExtResource("56_p75om")
-key_equal = ExtResource("32_rfj6u")
-key_slash = ExtResource("70_hqlef")
-key_backslash = ExtResource("19_rfj6u")
 key_backspace = ExtResource("20_y3typ")
 key_enter = ExtResource("31_n4av1")
-key_quoteleft = ExtResource("65_elqu5")
 key_alt = ExtResource("12_ifcyg")
 key_ctrl = ExtResource("19_rrmd5")
 key_shift = ExtResource("49_unbee")
@@ -172,4 +266,41 @@ key_f9 = ExtResource("35_0te8o")
 key_f10 = ExtResource("25_b03kh")
 key_f11 = ExtResource("26_n4av1")
 key_f12 = ExtResource("27_2a1ot")
+key_a_upper = SubResource("AtlasTexture_qj0kp")
+key_b_upper = SubResource("AtlasTexture_b03kh")
+key_c_upper = SubResource("AtlasTexture_n4av1")
+key_d_upper = SubResource("AtlasTexture_2a1ot")
+key_e_upper = SubResource("AtlasTexture_p75om")
+key_f_upper = SubResource("AtlasTexture_elqu5")
+key_g_upper = SubResource("AtlasTexture_x22e0")
+key_h_upper = SubResource("AtlasTexture_hqlef")
+key_i_upper = SubResource("AtlasTexture_q6jtx")
+key_j_upper = SubResource("AtlasTexture_k6q6c")
+key_k_upper = SubResource("AtlasTexture_5r14m")
+key_l_upper = SubResource("AtlasTexture_0te8o")
+key_m_upper = SubResource("AtlasTexture_w77xd")
+key_n_upper = SubResource("AtlasTexture_pr5us")
+key_o_upper = SubResource("AtlasTexture_ja6iw")
+key_p_upper = SubResource("AtlasTexture_xbfeb")
+key_q_upper = SubResource("AtlasTexture_1al11")
+key_r_upper = SubResource("AtlasTexture_pyqja")
+key_s_upper = SubResource("AtlasTexture_inip6")
+key_t_upper = SubResource("AtlasTexture_vji2b")
+key_u_upper = SubResource("AtlasTexture_oraef")
+key_v_upper = SubResource("AtlasTexture_vga0c")
+key_w_upper = SubResource("AtlasTexture_ffuk1")
+key_x_upper = SubResource("AtlasTexture_ycekv")
+key_y_upper = SubResource("AtlasTexture_ivu6d")
+key_z_upper = SubResource("AtlasTexture_unbee")
+key_minus = ExtResource("56_p75om")
+key_equal = ExtResource("32_rfj6u")
+key_bracketleft = ExtResource("21_qj0kp")
+key_bracketright = ExtResource("22_b03kh")
+key_backslash = ExtResource("19_rfj6u")
+key_semicolon = ExtResource("68_x22e0")
+key_apostrophe = ExtResource("13_ifcyg")
+key_comma = ExtResource("21_31p3n")
+key_period = ExtResource("55_71vli")
+key_slash = ExtResource("70_hqlef")
+key_quoteleft = ExtResource("65_elqu5")
 metadata/_custom_type_script = "uid://c3ievetg3ws5h"
